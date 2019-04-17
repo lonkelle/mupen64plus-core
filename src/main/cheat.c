@@ -280,7 +280,14 @@ void cheat_apply_cheats(struct cheat_ctx* ctx, struct r4300_core* r4300, int ent
                         default:
                             /* exclude boot-time cheat codes */
                             if ((code->address & 0xF0000000) != 0xF0000000) {
-                                execute_cheat(r4300, code->address, code->value, &code->old_value);
+                                
+                                uint32_t old_value = CHEAT_CODE_MAGIC_VALUE;
+                                execute_cheat(r4300, code->address, code->value, &old_value);
+                                
+                                if (code->old_value == CHEAT_CODE_MAGIC_VALUE || code->value != old_value)
+                                {
+                                    code->old_value = old_value;
+                                }
                             }
                             break;
                         }
