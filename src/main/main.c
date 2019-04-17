@@ -893,6 +893,7 @@ static void pause_loop(void)
 
 /* called on vertical interrupt.
  * Allow the core to perform various things */
+#if 0
 void new_vi(void)
 {
 #if defined(PROFILE)
@@ -906,6 +907,7 @@ void new_vi(void)
 
     pause_loop();
 }
+#endif
 
 static void main_switch_pak(int control_id)
 {
